@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: debug
-  Namespace: roboshop
+  namespace: roboshop   # lowercase 'namespace'
   labels:
-  name: debug
-  project: roboshop
+    app: debug
+    project: roboshop   # lowercase 'project' is fine under labels
 spec:
   containers:
   - name: debug
     image: joindevops/debug:v1
-    imagePullPolicy: Always
+    command: ["sleep", "3600"]
