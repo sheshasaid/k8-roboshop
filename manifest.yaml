@@ -2,28 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mongodb
-  namespace: roboshop
-
-  labels:
-    project: roboshop
-    component: mongodb
-    tier: db
-
 spec:
   replicas: 1
   selector:
     matchLabels:
+      app: nginx        # <-- must match pod template
       project: roboshop
       purpose: dp-demo
-      app: roboshop
-
   template:
     metadata:
       labels:
-        purpose: dp-demo
-        project: roboshop
         app: nginx
+        project: roboshop
+        purpose: dp-demo
     spec:
       containers:
-        - name: nginx
-          image: joindevops/mongodb:v1
+      - name: mongodb
+        image: mongo:6
+        ports:
+        - containerPort: 27017
